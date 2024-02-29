@@ -25,13 +25,17 @@ public class FlightController {
 
     // Display a specific flight
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Flight> getFlightById(){
-        return null;
+    public ResponseEntity<Flight> getFlightById(@PathVariable long id){
+        if (flightService.findFlightById(id).isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        Flight flight = flightService.findFlightById(id).get();
+        return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 
     // Add details of a new flight
     @PostMapping
-    public ResponseEntity<Flight> addNewFlight(){
+    public ResponseEntity<Flight> addNewFlight(Flight){
         return null;
     }
 
