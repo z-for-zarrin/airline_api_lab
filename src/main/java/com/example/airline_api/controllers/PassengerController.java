@@ -19,13 +19,18 @@ public class PassengerController {
     // Display details of all passengers
     @GetMapping
     public ResponseEntity<List<Passenger>> getAllPassengers(){
-        return null;
+        List<Passenger> passengers = passengerService.findAllPassengers();
+        return new ResponseEntity<>(passengers, HttpStatus.OK);
     }
 
     // Display specific passenger details
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Passenger> getPassengerById(){
-        return null;
+    public ResponseEntity<Passenger> findPassengerById(@PathVariable Long id){
+        if (passengerService.findPassengerById(id).isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        Passenger passenger = passengerService.findPassengerById(id).get();
+        return new ResponseEntity<>(passenger, HttpStatus.OK);
     }
 
     // Add a new passenger

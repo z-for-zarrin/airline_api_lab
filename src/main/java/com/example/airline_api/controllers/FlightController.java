@@ -36,7 +36,7 @@ public class FlightController {
 
     // Add details of a new flight
     @PostMapping
-    public ResponseEntity<Flight> addNewFlight(Flight flight){
+    public ResponseEntity<Flight> addNewFlight(@RequestBody Flight flight){
         Flight newFlight = flightService.saveFlight(flight);
         return new ResponseEntity<>(newFlight, HttpStatus.CREATED);
     }
