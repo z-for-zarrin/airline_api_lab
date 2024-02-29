@@ -42,6 +42,9 @@ public class FlightService {
 
     public Flight bookPassengerByFlightId(long flightId, PassengerDTO passengerDTO) {
         Flight flightToBook = findFlightById(flightId).get();
+        if (flightToBook.getPassengers().size() == flightToBook.getCapacity()) {
+            return null;
+        }
 
         if (passengerRepository.findById(passengerDTO.getId()).isPresent()) {
             Passenger passenger = passengerRepository.findById(passengerDTO.getId()).get();
