@@ -9,6 +9,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -35,9 +38,9 @@ public class DataLoader implements ApplicationRunner {
         passengerRepository.save(jorganLeckie);
 
         // FLIGHTS
-        Flight italy = new Flight("Rome", 200, "03/03/2024", "07:35");
-        Flight morocco = new Flight("Marrakesh", 250, "07/04/2024", "12:30");
-        Flight japan = new Flight("Tokyo", 300, "10/07/2024", "20:18");
+        Flight italy = new Flight("Rome", 200, LocalDate.of(2024, 3, 3), LocalTime.of(7,35));
+        Flight morocco = new Flight("Marrakesh", 250, LocalDate.of(2024, 4, 7), LocalTime.of(12,30));
+        Flight japan = new Flight("Tokyo", 300, LocalDate.of(2024, 7, 10), LocalTime.of(20, 18));
 
         // ASSIGNMENT
         italy.addPassenger(gussyBreyt);
