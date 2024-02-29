@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.annotation.Repeatable;
 import java.util.List;
 
 @RestController
@@ -35,8 +36,9 @@ public class FlightController {
 
     // Add details of a new flight
     @PostMapping
-    public ResponseEntity<Flight> addNewFlight(Flight){
-        return null;
+    public ResponseEntity<Flight> addNewFlight(Flight flight){
+        Flight newFlight = flightService.saveFlight(flight);
+        return new ResponseEntity<>(newFlight, HttpStatus.CREATED);
     }
 
     // Book passenger on a flight
