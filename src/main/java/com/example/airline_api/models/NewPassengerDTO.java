@@ -1,26 +1,13 @@
 package com.example.airline_api.models;
 
-public class PassengerDTO {
+public class NewPassengerDTO {
 
-    private long id;
     private String name;
     private String email;
 
-    public PassengerDTO(Long id, String name, String email) {
-        this.id = id;
+    public NewPassengerDTO(String name, String email) {
         this.name = name;
         this.email = email;
-    }
-
-    public PassengerDTO() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

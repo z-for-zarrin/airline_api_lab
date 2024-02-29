@@ -36,13 +36,17 @@ public class FlightService {
         flightRepository.deleteById(id);
     }
 
-    public Flight bookPassengerByFlightId(long flightId,Passenger passenger) {
+    public Flight bookPassengerByFlightId(long flightId, PassengerDTO passengerDTO) {
         Flight flightToBook = findFlightById(flightId).get();
-        passenger.getFlights().add(flightToBook);
-        flightToBook.getPassengers().add(passenger);
 
-        flightRepository.save(flightToBook);
-        passengerRepository.save(passenger);
+        if (passengerRepository.findById(passengerDTO.getId()).isPresent()) {
+            Passenger passenger = passengerRepository.findById(passengerDTO.getId()).get();
+            flightToBook.addPassenger(passenger);
+            return flightToBook;
+        }
+
+        Passenger passenger = new Passenger(passengerDTO.getName(), passengerDTO.getEmail());
+        flightToBook.addPassenger(passenger);
         return flightToBook;
     }
 }
