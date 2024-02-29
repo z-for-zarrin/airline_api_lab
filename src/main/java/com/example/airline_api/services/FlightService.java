@@ -28,6 +28,10 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
+    public List<Flight> findAllFlightsToDestination(String destination) {
+        return flightRepository.findByDestination(destination);
+    }
+
     public Optional<Flight> findFlightById(Long id) {
         return flightRepository.findById(id);
     }
@@ -42,11 +46,13 @@ public class FlightService {
         if (passengerRepository.findById(passengerDTO.getId()).isPresent()) {
             Passenger passenger = passengerRepository.findById(passengerDTO.getId()).get();
             flightToBook.addPassenger(passenger);
+            flightRepository.save(flightToBook);
             return flightToBook;
         }
 
         Passenger passenger = new Passenger(passengerDTO.getName(), passengerDTO.getEmail());
         flightToBook.addPassenger(passenger);
+        flightRepository.save(flightToBook);
         return flightToBook;
     }
 }
